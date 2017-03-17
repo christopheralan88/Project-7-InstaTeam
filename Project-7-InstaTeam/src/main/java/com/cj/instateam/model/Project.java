@@ -1,8 +1,6 @@
 package com.cj.instateam.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.List;
 
 
@@ -10,6 +8,7 @@ import java.util.List;
 public class Project {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column
@@ -22,9 +21,11 @@ public class Project {
     private String status;
 
     @Column(name = "roles_needed")
+    @OneToMany(mappedBy = "project")
     private List<Role> rolesNeeded;
 
     @Column
+    @ManyToMany
     private List<Collaborator> collaborators;
 
     public Project() {}

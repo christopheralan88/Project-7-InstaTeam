@@ -1,20 +1,25 @@
 package com.cj.instateam.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Collaborator {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column
     private String name;
 
     @Column
-    private Role role;
+    @OneToMany(mappedBy = "collaborator") // one collaborator to many roles
+    private List<Role> roles;
+
+    @Column
+    @ManyToMany
+    private List<Project> projects;
 
     public Collaborator() {}
 
@@ -34,11 +39,11 @@ public class Collaborator {
         this.name = name;
     }
 
-    public Role getRole() {
-        return role;
+    public List<Role> getRoles() {
+        return roles;
     }
 
-    public void setRole(Role role) {
-        this.role = role;
+    public void setRole(List<Role> roles) {
+        this.roles = roles;
     }
 }
