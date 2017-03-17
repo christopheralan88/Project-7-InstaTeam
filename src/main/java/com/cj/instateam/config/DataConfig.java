@@ -33,10 +33,10 @@ public class DataConfig {
     @Bean
     public DataSource createDataSource() {
         BasicDataSource dataSource = new BasicDataSource();
-        dataSource.setDriverClassName(env.getProperty("connection.driver_class"));
-        dataSource.setUrl(env.getProperty("connection.url"));
-        dataSource.setUsername(env.getProperty("hibernate.connection.username"));
-        dataSource.setPassword(env.getProperty("hibernate.connection.password"));
+        dataSource.setDriverClassName(env.getProperty("instateam.db.driver"));
+        dataSource.setUrl(env.getProperty("instateam.db.url"));
+        //dataSource.setUsername(env.getProperty("instateam.db.username"));
+        //dataSource.setPassword(env.getProperty("instateam.db.password"));
         return dataSource;
     }
 
