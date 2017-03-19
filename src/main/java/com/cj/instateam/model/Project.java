@@ -1,6 +1,7 @@
 package com.cj.instateam.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -21,8 +22,8 @@ public class Project {
     private String status;
 
     @Column(name = "roles_needed")
-    @OneToMany(mappedBy = "project")
-    private List<Role> rolesNeeded;
+    @ManyToMany
+    private List<Role> rolesNeeded = new ArrayList<>();
 
     @Column
     @ManyToMany

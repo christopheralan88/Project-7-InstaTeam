@@ -14,8 +14,8 @@ public class Collaborator {
     private String name;
 
     @Column
-    @OneToMany(mappedBy = "collaborator") // one collaborator to many roles
-    private List<Role> roles;
+    @ManyToOne // many to collaborators to one role
+    private Role role;
 
     @Column
     @ManyToMany
@@ -39,11 +39,11 @@ public class Collaborator {
         this.name = name;
     }
 
-    public List<Role> getRoles() {
-        return roles;
+    public Role getRole() {
+        return role;
     }
 
-    public void setRole(List<Role> roles) {
-        this.roles = roles;
+    public void setRole(Role role) {
+        this.role = role;
     }
 }

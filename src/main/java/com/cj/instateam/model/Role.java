@@ -2,6 +2,7 @@ package com.cj.instateam.model;
 
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity(name = "role")
@@ -14,11 +15,13 @@ public class Role {
     @Column
     private String name; // TODO:  CJ use enum class for this to validate data?
 
-    @ManyToOne // many roles to one collaborator
-    private Collaborator collaborator; // TODO: CJ does this make sense?
+    @Column
+    @OneToMany(mappedBy = "role") // many roles to one collaborator
+    private List<Collaborator> collaborators = new ArrayList<>(); // TODO: CJ does this make sense?
 
-    @ManyToOne // many roles to one project
-    private Project project; // TODO: CJ does this make sense?
+    @Column
+    @ManyToMany // many roles to many project
+    private List<Project> projects = new ArrayList<>(); // TODO: CJ does this make sense?
 
     public Role() {}
 
@@ -36,5 +39,21 @@ public class Role {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<Collaborator> getCollaborators() {
+        return collaborators;
+    }
+
+    public void setCollaborators(List<Collaborator> collaborators) {
+        this.collaborators = collaborators;
+    }
+
+    public List<Project> getProjects() {
+        return projects;
+    }
+
+    public void setProjects(List<Project> projects) {
+        this.projects = projects;
     }
 }

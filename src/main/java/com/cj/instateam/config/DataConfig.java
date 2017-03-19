@@ -26,18 +26,25 @@ public class DataConfig {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setConfigLocation(config);
         sessionFactory.setPackagesToScan(env.getProperty("instateam.entity.package"));
-        sessionFactory.setDataSource(createDataSource());
+        sessionFactory.setDataSource(dataSource());
         return sessionFactory;
     }
 
     @Bean
-    public DataSource createDataSource() {
-        BasicDataSource dataSource = new BasicDataSource();
-        dataSource.setDriverClassName(env.getProperty("instateam.db.driver"));
-        dataSource.setUrl(env.getProperty("instateam.db.url"));
-        //dataSource.setUsername(env.getProperty("instateam.db.username"));
-        //dataSource.setPassword(env.getProperty("instateam.db.password"));
-        return dataSource;
+    public DataSource dataSource() {
+        BasicDataSource ds = new BasicDataSource();
+
+        // Driver class name
+        ds.setDriverClassName(env.getProperty("instateam.db.driver"));
+
+        // Set URL
+        ds.setUrl(env.getProperty("instateam.db.url"));
+
+        // Set username & password
+        ds.setUsername(env.getProperty("instateam.db.username"));
+        ds.setPassword(env.getProperty("instateam.db.password"));
+
+        return ds;
     }
 
 }
