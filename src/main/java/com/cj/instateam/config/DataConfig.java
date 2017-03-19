@@ -21,7 +21,7 @@ public class DataConfig {
     private Environment env; // app.properties values are stores here
 
     @Bean
-    public LocalSessionFactoryBean sessionFactory() {
+    public LocalSessionFactoryBean sessionFactory() { // LocalSessionFactoryBean implements FactoryBean<SessionFactory>
         Resource config = new ClassPathResource("hibernate.cfg.xml");
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setConfigLocation(config);

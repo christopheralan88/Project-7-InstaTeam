@@ -21,11 +21,9 @@ public class Project {
     @Column
     private String status;
 
-    @Column(name = "roles_needed")
     @ManyToMany
     private List<Role> rolesNeeded = new ArrayList<>();
 
-    @Column
     @ManyToMany
     private List<Collaborator> collaborators;
 

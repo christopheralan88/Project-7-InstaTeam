@@ -13,13 +13,12 @@ public class Collaborator {
     @Column
     private String name;
 
-    @Column
     @ManyToOne // many to collaborators to one role
     private Role role;
 
-    @Column
+    /*@Column
     @ManyToMany
-    private List<Project> projects;
+    private List<Project> projects;*/
 
     public Collaborator() {}
 
