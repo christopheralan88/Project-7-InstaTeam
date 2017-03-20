@@ -1,7 +1,7 @@
 package com.cj.instateam.dao;
 
 
-import com.cj.instateam.model.Role;
+import com.cj.instateam.model.Collaborator;
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -10,46 +10,44 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-
-@Repository  // Don't need constructor because @Repository creates bean for you?
-public class RoleDaoImpl implements RoleDao{
+@Repository
+public class CollaboratorDaoImpl implements CollaboratorDao{
     @Autowired
-    private SessionFactory sessionFactory; // LocalSessionFactoryBean returned from sessionFactory()
-    // method in DataConfig class is eligible for DI for this field b/c it implements FactoryBean<SessionFactory>
+    private SessionFactory sessionFactory;
 
     @Override
-    public List<Role> findAll() {
+    @SuppressWarnings("unchecked")
+    public List<Collaborator> findAll() {
         Session session = sessionFactory.openSession();
-        List<Role> roles = session.createCriteria(Role.class).list();
+        List<Collaborator> collaborators = session.createCriteria(Collaborator.class).list();
         session.close();
-        return roles;
+        return collaborators;
     }
 
     @Override
-    public Role findById(int id) {
+    public Collaborator findById(int id) {
         Session session = sessionFactory.openSession();
-        Role role = session.get(Role.class, id);
-        Hibernate.initialize(role.getName());
+        Collaborator collaborator = session.get(Collaborator.class, id);
+        Hibernate.initialize(collaborator.getName()); // TODO:  CJ get other class fields too?
         session.close();
-        return role;
+        return collaborator;
     }
 
     @Override
-    public void save(Role role) {
+    public void save(Collaborator collaborator) {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
-        session.saveOrUpdate(role);
+        session.saveOrUpdate(collaborator);
         session.getTransaction().commit();
         session.close();
     }
 
     @Override
-    public void delete(Role role) {
+    public void delete(Collaborator collaborator) {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
-        session.delete(role);
+        session.delete(collaborator);
         session.getTransaction().commit();
         session.close();
     }
-
 }

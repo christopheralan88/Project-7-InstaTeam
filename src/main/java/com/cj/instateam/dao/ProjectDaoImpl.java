@@ -1,7 +1,6 @@
 package com.cj.instateam.dao;
 
-
-import com.cj.instateam.model.Role;
+import com.cj.instateam.model.Project;
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -10,46 +9,44 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-
-@Repository  // Don't need constructor because @Repository creates bean for you?
-public class RoleDaoImpl implements RoleDao{
+@Repository
+public class ProjectDaoImpl implements ProjectDao{
     @Autowired
-    private SessionFactory sessionFactory; // LocalSessionFactoryBean returned from sessionFactory()
-    // method in DataConfig class is eligible for DI for this field b/c it implements FactoryBean<SessionFactory>
+    private SessionFactory sessionFactory;
 
     @Override
-    public List<Role> findAll() {
+    @SuppressWarnings("unchecked")
+    public List<Project> findAll() {
         Session session = sessionFactory.openSession();
-        List<Role> roles = session.createCriteria(Role.class).list();
+        List<Project> projects = session.createCriteria(Project.class).list();
         session.close();
-        return roles;
+        return projects;
     }
 
     @Override
-    public Role findById(int id) {
+    public Project findById(int id) {
         Session session = sessionFactory.openSession();
-        Role role = session.get(Role.class, id);
-        Hibernate.initialize(role.getName());
+        Project project = session.get(Project.class, id);
+        Hibernate.initialize(project.getName()); // TODO:  CJ get other Project fields?
         session.close();
-        return role;
+        return project;
     }
 
     @Override
-    public void save(Role role) {
+    public void save(Project project) {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
-        session.saveOrUpdate(role);
+        session.saveOrUpdate(project);
         session.getTransaction().commit();
         session.close();
     }
 
     @Override
-    public void delete(Role role) {
+    public void delete(Project project) {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
-        session.delete(role);
+        session.delete(project);
         session.getTransaction().commit();
         session.close();
     }
-
 }
