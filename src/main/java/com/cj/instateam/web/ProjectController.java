@@ -16,10 +16,12 @@ public class ProjectController {
     @Autowired
     private ProjectService projectService;
 
-    @RequestMapping(value = "/projects", method = RequestMethod.GET)
+    @RequestMapping(value = {"/", "/projects"}, method = RequestMethod.GET)
     public String listProjects(Model model) {
         List<Project> projects = projectService.findAll();
         model.addAttribute("projects", projects);
         return "index";
     }
+
+
 }
