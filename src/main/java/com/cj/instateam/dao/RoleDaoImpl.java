@@ -18,6 +18,7 @@ public class RoleDaoImpl implements RoleDao{
     // method in DataConfig class is eligible for DI for this field b/c it implements FactoryBean<SessionFactory>
 
     @Override
+    @SuppressWarnings("unchecked")
     public List<Role> findAll() {
         Session session = sessionFactory.openSession();
         List<Role> roles = session.createCriteria(Role.class).list();
