@@ -41,39 +41,44 @@ public class Project {
         return name;
     }
 
-    public void setName(String name) {
+    public Project setName(String name) {
         this.name = name;
+        return this;
     }
 
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
+    public Project setDescription(String description) {
         this.description = description;
+        return this;
     }
 
     public String getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public Project setStatus(String status) {
         this.status = status;
+        return this;
     }
 
     public List<Role> getRolesNeeded() {
         return rolesNeeded;
     }
 
-    public void setRolesNeeded(List<Role> rolesNeeded) {
+    public Project setRolesNeeded(List<Role> rolesNeeded) {
         this.rolesNeeded = rolesNeeded;
+        return this;
     }
 
     public List<Collaborator> getCollaborators() {
         return collaborators;
     }
 
-    public void setCollaborators(List<Collaborator> collaborators) {
+    public Project setCollaborators(List<Collaborator> collaborators) {
         this.collaborators = collaborators;
+        return this;
     }
 }

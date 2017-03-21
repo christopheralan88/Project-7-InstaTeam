@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org">
+    <head>
+        <meta charset="utf-8"/>
+        <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+        <title>InstaTeam</title>
+        <link href='https://fonts.googleapis.com/css?family=Inconsolata:400,700' rel='stylesheet' type='text/css'/>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+        <link rel="stylesheet" href="css/normalize.css"/>
+        <link rel="stylesheet" href="css/site.css"/>
+    </head>
+    <body>
+        <header>
+            <div class="container">
+                <div class="site-header">
+                    <a class="logo" href="index.html">InstaTeam</a>
+                    <a class="new-project button icon-left" href="#"><i class="material-icons">add</i> New Project</a>
+                </div>
+            </div>
+        </header>
+        <nav>
+            <ul>
+                <li class="selected"><a href="index.html">Projects</a></li>
+                <li><a href="collaborators.html">Collaborators</a></li>
+                <li><a href="roles.html">Roles</a></li>
+            </ul>
+        </nav>
+        <section>
+            <div>
+                <!--<form action="/" method="post">
+                    Project Name:
+                    <br/>
+                    <input type="text" name="name" id="name">
+                    <select name="sort" id="sort">
+                        <option value="Country Name">Country Name</option>
+                        <option value="Population">Population</option>
+                    </select>
+                    <button type="submit" id="submit" name="submit">Sort</button>
+                </form>-->
+                <form action="/" method="post">
+                    Project Name:
+                    <br/>
+                    <input type="text" name="name" id="name"/>
+                    <br/>
+
+                    Project Description:
+                    <br/>
+                    <textarea name="description" id="description" cols="50" rows="10"></textarea>
+                    <br/>
+
+                    Status:
+                    <select name="status" id="status">
+                        <option value="Active">Active</option>
+                        <option value="Closed">Closed</option>
+                        <option value="Complete">Complete</option>
+                    </select>
+                    <br/>
+                    <br/>
+
+                    <button type="submit" id="submit" name="submit">Add Project</button>
+                </form>
+            </div>
+        </section>
+    </body>
+</html>
