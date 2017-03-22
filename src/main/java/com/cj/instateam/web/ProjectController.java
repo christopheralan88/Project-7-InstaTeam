@@ -51,5 +51,25 @@ public class ProjectController {
         return "redirect:/";
     }
 
+    @RequestMapping(value = "/edit_project/{id}", method = RequestMethod.GET)
+    public String viewEditProject(@PathVariable int id, ModelMap model) {
+        Project project = projectService.findById(id);
+        model.put("project", project);
+        return "edit_project";
+    }
+
+    @RequestMapping(value = "/edit_project/{id}", method = RequestMethod.POST)
+    public String editProject(@PathVariable int id,
+                              @RequestParam(value = "project_name") String name,
+                              @RequestParam(value = "project_description") String description,
+                              @RequestParam(value = "project_status") String status,
+                              ModelMap model) {
+        Project project = new Project().setId(id)
+                                       .setName(name)
+                                       .setDescription(description)
+                                       .setStatus(status);
+        projectService.save(project);
+        return "redirect:/project-detail/{id}";
+    }
 
 }

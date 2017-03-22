@@ -33,8 +33,9 @@ public class Project {
         return id;
     }
 
-    public void setId(int id) {
+    public Project setId(int id) {
         this.id = id;
+        return this;
     }
 
     public String getName() {

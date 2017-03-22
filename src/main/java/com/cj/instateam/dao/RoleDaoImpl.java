@@ -21,7 +21,7 @@ public class RoleDaoImpl implements RoleDao{
     @SuppressWarnings("unchecked")
     public List<Role> findAll() {
         Session session = sessionFactory.openSession();
-        List<Role> roles = session.createCriteria(Role.class).list();
+        List<Role> roles = session.createCriteria(Role.class).list(); //TODO: CJ add ORDER BY clause to order roles alphabetically
         session.close();
         return roles;
     }

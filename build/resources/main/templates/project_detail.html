@@ -13,7 +13,7 @@
         <header>
             <div class="container">
                 <div class="site-header">
-                    <a class="logo" href="index.html">InstaTeam</a>
+                    <a class="logo" href="/">InstaTeam</a>
                     <a class="new-project button icon-left" href="/add_project"><i class="material-icons">add</i> New Project</a>
                 </div>
             </div>
@@ -41,7 +41,7 @@
                         </div>
                     </div>
                     <div class="actions">
-                        <a class="button" href="edit_project.html">Edit Project</a>
+                        <a class="button" th:href="'/edit_project/' + ${project.id}">Edit Project</a>
                         <a class="button" href="project_collaborators.html">Edit Collaborators</a>
                     </div>
                 </div>
