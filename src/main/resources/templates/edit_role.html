@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" xmlns:th="www.thymeleaf.org">
     <head>
         <meta charset="utf-8"/>
         <meta http-equiv="x-ua-compatible" content="ie=edge"/>
-        <title>InstaTeam</title>
+        <title>Edit Role</title>
         <link href='https://fonts.googleapis.com/css?family=Inconsolata:400,700' rel='stylesheet' type='text/css'/>
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
         <link rel="stylesheet" th:href="@{/normalize.css}"/>
@@ -20,34 +20,22 @@
         </header>
         <nav>
             <ul>
-                <li class="selected"><a href="index.html">Projects</a></li>
+                <li><a href="index.html">Projects</a></li>
                 <li><a href="collaborators.html">Collaborators</a></li>
-                <li><a href="roles.html">Roles</a></li>
+                <li class="selected"><a href="/roles">Roles</a></li>
             </ul>
         </nav>
         <section>
             <div>
-                <form action="/" method="post">
-                    Project Name:
+                <form action="/roles" method="post">
+                    <label for="role_name">Enter Role's New Name</label>
                     <br/>
-                    <input type="text" name="name" id="name"/>
+                    <input type="hidden" id="role_id" th:value="${role.id}"/>
+                    <!--<h1 class="hidden" id="role_id" th:text="${role.id}"></h1>-->
                     <br/>
-
-                    Project Description:
+                    <input type="text" id="role_name" name="role_name" th:placeholder="${role.name}"/>
                     <br/>
-                    <textarea name="description" id="description" cols="50" rows="10"></textarea>
-                    <br/>
-
-                    Status:
-                    <select name="status" id="status">
-                        <option value="Active">Active</option>
-                        <option value="Closed">Closed</option>
-                        <option value="Complete">Complete</option>
-                    </select>
-                    <br/>
-                    <br/>
-
-                    <button type="submit" id="submit" name="submit">Add Project</button>
+                    <button type="submit" id="submit" name="submit">Edit</button>
                 </form>
             </div>
         </section>

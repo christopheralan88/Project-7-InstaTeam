@@ -6,8 +6,8 @@
         <title>InstaTeam</title>
         <link href='https://fonts.googleapis.com/css?family=Inconsolata:400,700' rel='stylesheet' type='text/css'/>
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
-        <link rel="stylesheet" href="css/normalize.css"/>
-        <link rel="stylesheet" href="css/site.css"/>
+        <link rel="stylesheet" th:href="@{/normalize.css}"/>
+        <link rel="stylesheet" th:href="@{/site.css}"/>
     </head>
     <body>
         <header>
@@ -31,9 +31,13 @@
                     <h2>Manage Roles</h2>
                     <div>
                         <ul class="checkbox-list">
-                            <li th:each="role : ${roles}" th:text="${role.name}"><span class="primary"></span></li>
+                            <li th:each="role : ${roles}">
+                                <a th:href="'/edit_role/' + ${role.id}" th:text="${role.name}"></a>
+                            </li>
                         </ul>
                     </div>
+                    <button type="button" id="edit" name="edit">Edit</button>
+                    <br/>
                     <div class="actions add-new-role">
                         <input type="text" id="role_name" name="role_name" placeholder="New Role..."/>
                         <!--<a class="button" href="#">Add</a>-->
