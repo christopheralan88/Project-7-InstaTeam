@@ -33,8 +33,17 @@ public class RoleController {
         return "redirect:/roles";
     }
 
-    @RequestMapping(value = "/roles", method = RequestMethod.POST, params = {"role_id", "role_name"})
+    /*@RequestMapping(value = "/roles", method = RequestMethod.POST, params = {"role_id", "role_name"})
     public String editRole(@RequestParam(value = "role_id") String id,
+                           @RequestParam(value = "role_name") String name) {
+        Role role = new Role().setId(Integer.parseInt(id))
+                              .setName(name);
+        roleService.save(role);
+        return "redirect:/roles";
+    }*/
+
+    @RequestMapping(value = "/edit_role/{id}", method = RequestMethod.POST)
+    public String editRole(@PathVariable String id,
                            @RequestParam(value = "role_name") String name) {
         Role role = new Role().setId(Integer.parseInt(id))
                               .setName(name);

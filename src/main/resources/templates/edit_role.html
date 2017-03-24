@@ -27,11 +27,12 @@
         </nav>
         <section>
             <div>
-                <form action="/roles" method="post">
+                <form th:action="'/edit_role/' + ${role.id}" method="post">
+                    <input type="hidden" th:field="*{role.id}"/>
                     <label for="role_name">Enter Role's New Name</label>
                     <br/>
-                    <input type="hidden" id="role_id" th:value="${role.id}"/>
-                    <!--<h1 class="hidden" id="role_id" th:text="${role.id}"></h1>-->
+                    <!--th:value="${role.id}"-->
+                    <!--<h1 class="hidden" id="role_id" th:text="${role.id}" id="role_id"></h1>-->
                     <br/>
                     <input type="text" id="role_name" name="role_name" th:placeholder="${role.name}"/>
                     <br/>
