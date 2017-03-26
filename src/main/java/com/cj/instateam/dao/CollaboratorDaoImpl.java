@@ -19,6 +19,11 @@ public class CollaboratorDaoImpl implements CollaboratorDao{
     @SuppressWarnings("unchecked")
     public List<Collaborator> findAll() {
         Session session = sessionFactory.openSession();
+        //String hql = "SELECT collaborator.id, collaborator.name, role.name " +
+                     //"FROM com.cj.instateam.model.collaborator " +
+                     //"LEFT JOIN role on collaborator.id = role.id ";
+        //Query query = session.createQuery(hql);
+        //List<Collaborator> collaborators = query.getResultList();
         List<Collaborator> collaborators = session.createCriteria(Collaborator.class).list();
         session.close();
         return collaborators;

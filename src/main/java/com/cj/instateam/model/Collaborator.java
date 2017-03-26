@@ -1,7 +1,6 @@
 package com.cj.instateam.model;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 public class Collaborator {
@@ -13,12 +12,8 @@ public class Collaborator {
     @Column
     private String name;
 
-    @ManyToOne // many to collaborators to one role
+    @ManyToOne // many collaborators to one role
     private Role role;
-
-    /*@Column
-    @ManyToMany
-    private List<Project> projects;*/
 
     public Collaborator() {}
 
@@ -26,23 +21,26 @@ public class Collaborator {
         return id;
     }
 
-    public void setId(int id) {
+    public Collaborator setId(int id) {
         this.id = id;
+        return this;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public Collaborator setName(String name) {
         this.name = name;
+        return this;
     }
 
     public Role getRole() {
         return role;
     }
 
-    public void setRole(Role role) {
+    public Collaborator setRole(Role role) {
         this.role = role;
+        return this;
     }
 }
