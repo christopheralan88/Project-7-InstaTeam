@@ -13,8 +13,8 @@
         <header>
             <div class="container">
                 <div class="site-header">
-                    <a class="logo" href="index.html">InstaTeam</a>
-                    <a class="new-project button icon-left" href="#"><i class="material-icons">add</i> New Project</a>
+                    <a class="logo" href="/">InstaTeam</a>
+                    <a class="new-project button icon-left" href="/add_project"><i class="material-icons">add</i> New Project</a>
                 </div>
             </div>
         </header>
@@ -37,16 +37,11 @@
                         </li>
                     </ul>
                     <div class="actions add-new-collaborator">
-                        <input type="text" placeholder="Name..."/>
+                        <input type="text" id="collaborator_name" name="collaborator_name" placeholder="Name..."/>
                         <div class="custom-select">
                             <span class="dropdown-arrow"></span>
                             <select id="role_name" name="role_name">
-                               <option value="" disabled="disabled">Role...</option>
-                                <option value="Developer">Developer</option>
-                                <option value="Designer">Designer</option>
-                                <option value="QA">QA</option>
-                                <option value="DevOps">DevOps</option>
-                                <option value="Copywriter">Copywriter</option>-->
+                                <option th:each="role : ${roles}" th:value="${role.id}" th:text="${role.name}"></option>
                             </select>
                         </div>
                         <button class="button" type="submit">Add</button>

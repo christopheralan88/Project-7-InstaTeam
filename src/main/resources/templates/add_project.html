@@ -14,15 +14,15 @@
             <div class="container">
                 <div class="site-header">
                     <a class="logo" href="/">InstaTeam</a>
-                    <a class="new-project button icon-left" href="#"><i class="material-icons">add</i> New Project</a>
+                    <a class="new-project button icon-left" href="/add_project"><i class="material-icons">add</i> New Project</a>
                 </div>
             </div>
         </header>
         <nav>
             <ul>
-                <li class="selected"><a href="index.html">Projects</a></li>
-                <li><a href="collaborators.html">Collaborators</a></li>
-                <li><a href="roles.html">Roles</a></li>
+                <li class="selected"><a href="/">Projects</a></li>
+                <li><a href="/collaborators">Collaborators</a></li>
+                <li class="selected"><a href="/roles">Roles</a></li>
             </ul>
         </nav>
         <section>
@@ -46,6 +46,11 @@
                     </select>
                     <br/>
                     <br/>
+                    
+                    Roles Needed:
+                    <select multiple="multiple" name="roles_needed" id="roles_needed">
+                        <option th:each="role : ${roles}" th:value="${role.id}" th:text="${role.name}"></option>
+                    </select>
 
                     <button type="submit" id="submit" name="submit">Add Project</button>
                 </form>

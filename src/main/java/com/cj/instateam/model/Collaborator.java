@@ -1,6 +1,7 @@
 package com.cj.instateam.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Collaborator {
@@ -14,6 +15,9 @@ public class Collaborator {
 
     @ManyToOne // many collaborators to one role
     private Role role;
+
+    /*@ManyToMany(mappedBy = "collaborators")
+    private List<Project> projects;*/
 
     public Collaborator() {}
 

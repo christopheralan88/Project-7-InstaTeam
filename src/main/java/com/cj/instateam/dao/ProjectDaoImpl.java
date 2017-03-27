@@ -1,7 +1,9 @@
 package com.cj.instateam.dao;
 
+import com.cj.instateam.model.Collaborator;
 import com.cj.instateam.model.Project;
 import org.hibernate.Hibernate;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +32,15 @@ public class ProjectDaoImpl implements ProjectDao{
         Hibernate.initialize(project.getName()); // TODO:  CJ get other Project fields?
         session.close();
         return project;
+    }
+
+    @Override
+    public List<Integer> projectCollaborators (int id) {
+        Session session = sessionFactory.openSession();
+        String hql = String.format("FROM PROJECT_ROLE WHERE PROJECT_ID = %d", id);
+        Query query = session.createQuery(hql);
+        List<Integer> roleIds= query.list();
+        return roleIds;
     }
 
     @Override

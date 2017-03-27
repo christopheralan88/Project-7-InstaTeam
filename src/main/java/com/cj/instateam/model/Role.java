@@ -13,16 +13,14 @@ public class Role {
     private int id;
 
     @Column
-    private String name; // TODO:  CJ use enum class for this to validate data?
+    private String name;
 
     @OneToMany(mappedBy = "role") // many roles to one collaborator...mappedby means
     // this field is mapped to role field of collaborators entity/table?
     private List<Collaborator> collaborators = new ArrayList<>();
 
-    /*
-    @ManyToMany // many roles to many project
-    private List<Project> projects = new ArrayList<>();
-    */
+    /*@ManyToMany(mappedBy = "rolesNeeded")
+    private List<Project> projects = new ArrayList<>();*/
 
     public Role() {}
 
@@ -44,19 +42,4 @@ public class Role {
         return this;
     }
 
-    /*public List<Collaborator> getCollaborators() {
-        return collaborators;
-    }
-
-    public void setCollaborators(List<Collaborator> collaborators) {
-        this.collaborators = collaborators;
-    }
-
-    public List<Project> getProjects() {
-        return projects;
-    }
-
-    public void setProjects(List<Project> projects) {
-        this.projects = projects;
-    }*/
 }

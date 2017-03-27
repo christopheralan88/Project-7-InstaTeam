@@ -23,6 +23,11 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
+    public List<Integer> projectCollaborators (int id) {
+        return projectDao.projectCollaborators(id);
+    }
+
+    @Override
     public void save(Project project) {
         projectDao.save(project);
     }

@@ -20,8 +20,8 @@
         </header>
         <nav>
             <ul>
-                <li><a href="index.html">Projects</a></li>
-                <li><a href="collaborators.html">Collaborators</a></li>
+                <li><a href="/">Projects</a></li>
+                <li><a href="/collaborators">Collaborators</a></li>
                 <li class="selected"><a href="/roles">Roles</a></li>
             </ul>
         </nav>
@@ -30,10 +30,8 @@
                 <form th:action="'/edit_role/' + ${role.id}" method="post">
                     <input type="hidden" th:field="*{role.id}"/>
                     <label for="role_name">Enter Role's New Name</label>
-                    <br/>
                     <!--th:value="${role.id}"-->
                     <!--<h1 class="hidden" id="role_id" th:text="${role.id}" id="role_id"></h1>-->
-                    <br/>
                     <input type="text" id="role_name" name="role_name" th:placeholder="${role.name}"/>
                     <br/>
                     <button type="submit" id="submit" name="submit">Edit</button>

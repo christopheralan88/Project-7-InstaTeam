@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.swing.*;
 import java.util.List;
 
 @Controller
@@ -21,7 +20,7 @@ public class CollaboratorController {
     private CollaboratorService collaboratorService;
 
     @Autowired
-    private RoleService roleService; // TODO:  CJ am I allowed to have two different Service beans???
+    private RoleService roleService;
 
     @RequestMapping(value = "/collaborators", method = RequestMethod.GET)
     public String viewCollaborators(ModelMap model) {
