@@ -37,11 +37,12 @@
                         </li>
                     </ul>
                     <div class="actions add-new-collaborator">
-                        <input type="text" placeholder="Name..."/>
+                        <input type="text" id="collaborator_name" name="collaborator_name" placeholder="Name..."/>
                         <div class="custom-select">
                             <span class="dropdown-arrow"></span>
                             <select id="role_name" name="role_name">
-                               <option value="" disabled="disabled">Role...</option>
+                                <option th:each="role : ${roles}" th:value="${role.id}" th:text="${role.name}"></option>
+                                <!--<option value="" disabled="disabled">Role...</option>
                                 <option value="Developer">Developer</option>
                                 <option value="Designer">Designer</option>
                                 <option value="QA">QA</option>

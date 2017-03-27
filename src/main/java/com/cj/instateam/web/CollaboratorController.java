@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.swing.*;
 import java.util.List;
 
 @Controller
@@ -25,7 +26,9 @@ public class CollaboratorController {
     @RequestMapping(value = "/collaborators", method = RequestMethod.GET)
     public String viewCollaborators(ModelMap model) {
         List<Collaborator> collaborators = collaboratorService.findAll();
+        List<Role> roles = roleService.findAll();
         model.put("collaborators", collaborators);
+        model.put("roles", roles);
         return "collaborators";
     }
 
@@ -39,14 +42,36 @@ public class CollaboratorController {
         return "edit_collaborators";
     }
 
-    @RequestMapping(value = "/collaborators", method = RequestMethod.POST)
-    public String addCollaborator(@RequestParam(value = "collaborator_id") String collaboratorId,
-                                  @RequestParam(value = "collaborator_name") String collaboratorName,
-                                  @RequestParam(value = "role") String roleId) {
+    /*@RequestMapping(value = "/edit_collaborator/{id}", method = RequestMethod.POST)
+    public String addCollaborator(@PathVariable(value = "id") String id) // collaborator id
+    //@RequestParam(value = "collaborator_name") String collaboratorName,
+    //@RequestParam(value = "role") String roleId)
+    {
+        Role role = roleService.findById(Integer.parseInt(id));
+        Collaborator collaborator = new Collaborator().setId(Integer.parseInt(id))
+                .setName(id)
+                .setRole(role);
+        collaboratorService.save(collaborator);
+        return "redirect:/collaborators";
+    }*/
+
+    @RequestMapping(value = "/edit_collaborator/{id}", method = RequestMethod.POST)
+    public String editCollaborators(@PathVariable(value = "id") String id, // collaborator id
+                                    @RequestParam(value = "collaborator_name") String collaboratorName,
+                                    @RequestParam(value = "role_name") String roleId) {
         Role role = roleService.findById(Integer.parseInt(roleId));
-        Collaborator collaborator = new Collaborator().setId(Integer.parseInt(collaboratorId))
+        Collaborator collaborator = new Collaborator().setId(Integer.parseInt(id))
                                                       .setName(collaboratorName)
                                                       .setRole(role);
+        collaboratorService.save(collaborator);
+        return "redirect:/collaborators";
+    }
+
+    @RequestMapping(value = "/collaborators", method = RequestMethod.POST)
+    public String addCollaborator(@RequestParam(value = "collaborator_name") String name,
+                                  @RequestParam(value = "role_name") String roleId) {
+        Role role = roleService.findById(Integer.parseInt(roleId));
+        Collaborator collaborator = new Collaborator().setName(name).setRole(role);
         collaboratorService.save(collaborator);
         return "redirect:/collaborators";
     }
