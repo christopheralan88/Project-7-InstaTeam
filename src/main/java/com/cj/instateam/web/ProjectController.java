@@ -96,16 +96,13 @@ public class ProjectController {
     @RequestMapping(value = "/project_collaborators/{projectId}", method = RequestMethod.GET)
     public String editProjectCollaborators(@PathVariable(value = "projectId") String projectId,
                                            ModelMap model) {
-        //Project project = projectService.findById(Integer.parseInt(projectId));
-        List<Integer> projectRoleIds = projectService.projectCollaborators(Integer.parseInt(projectId));
-        List<Role> projectRoles = new ArrayList<>();
-        for (Integer projectRoleId : projectRoleIds) {
-            projectRoles.add(roleService.findById(projectRoleId));
-        }
+        Project project = projectService.findById(Integer.parseInt(projectId));
+        List<Role> roles = roleService.findAll();
         List<Collaborator> collaborators = collaboratorService.findAll();
-        //model.put("project", project);
-        model.put("roles", projectRoles);
+        model.put("project", project);
+        model.put("roles", roles);
         model.put("collaborators", collaborators);
+
         return "project_collaborators";
     }
 

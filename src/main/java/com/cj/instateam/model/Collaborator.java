@@ -1,5 +1,7 @@
 package com.cj.instateam.model;
 
+import javax.validation.constraints.NotNull;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -11,9 +13,11 @@ public class Collaborator {
     private int id;
 
     @Column
+    @NotNull
     private String name;
 
     @ManyToOne // many collaborators to one role
+    @NotNull
     private Role role;
 
     /*@ManyToMany(mappedBy = "collaborators")

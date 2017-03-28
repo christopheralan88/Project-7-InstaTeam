@@ -1,5 +1,7 @@
 package com.cj.instateam.model;
 
+import javax.validation.constraints.NotNull;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,19 +15,28 @@ public class Project {
     private int id;
 
     @Column
+    @NotNull
     private String name;
 
     @Column
+    @NotNull
     private String description;
 
     @Column
+    @NotNull
     private String status;
 
-    @ManyToMany
+    @ManyToMany(cascade = {CascadeType.ALL})
+    @JoinTable(name = "PROJECT_ROLE",
+               joinColumns = @JoinColumn(name = "PROJECT_ID"),
+               inverseJoinColumns = @JoinColumn(name = "ROLESNEEDED_ID"))
     private List<Role> rolesNeeded = new ArrayList<>();
 
-    @ManyToMany
-    private List<Collaborator> collaborators;
+    @ManyToMany(cascade = {CascadeType.ALL})
+    @JoinTable(name = "PROJECT_COLLABORATOR",
+               joinColumns = @JoinColumn(name = "PROJECT_ID"),
+               inverseJoinColumns = @JoinColumn(name = "COLLABORATORS_ID"))
+    private List<Collaborator> collaborators = new ArrayList<>();
 
     public Project() {}
 

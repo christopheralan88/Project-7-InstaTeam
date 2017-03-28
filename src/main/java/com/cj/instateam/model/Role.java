@@ -1,6 +1,8 @@
 package com.cj.instateam.model;
 
 
+import javax.validation.constraints.NotNull;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,9 +15,10 @@ public class Role {
     private int id;
 
     @Column
+    @NotNull
     private String name;
 
-    @OneToMany(mappedBy = "role") // many roles to one collaborator...mappedby means
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "role") // many roles to one collaborator...mappedby means
     // this field is mapped to role field of collaborators entity/table?
     private List<Collaborator> collaborators = new ArrayList<>();
 
