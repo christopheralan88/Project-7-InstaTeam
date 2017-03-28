@@ -30,6 +30,8 @@ public class ProjectDaoImpl implements ProjectDao{
         Session session = sessionFactory.openSession();
         Project project = session.get(Project.class, id);
         Hibernate.initialize(project.getName()); // TODO:  CJ get other Project fields?
+        Hibernate.initialize(project.getCollaborators());
+        Hibernate.initialize(project.getRolesNeeded());
         session.close();
         return project;
     }
