@@ -27,22 +27,29 @@
         </nav>
         <section>
             <div class="container wrapper">
-                <form>
-                    <label>Edit Collaborators: Website Project</label>
+                <form th:action="'/project-detail/' + ${project.id}" method="post" th:object="${project}">
+                    <input type="hidden" th:field="*{id}"/>
+                    <input type="hidden" th:field="*{description}"/>
+                    <input type="hidden" th:field="*{name}"/>
+                    <input type="hidden" th:field="*{status}"/>
+                    <label th:text="'Edit Collaborators:  ' + *{name}"></label>
                     <ul class="checkbox-list">
-                        <li th:each="role : ${roles}">
-                            <span class="primary" th:text="${role.name}"></span>
+                        <li th:each="role : *{rolesNeeded}">
+                            <span th:text="${role.name}" class="primary"></span>
+                            <input type="hidden" th:field="*{rolesNeeded[__${roleStat.index}__].id}" th:value="${role.id}"/>
                             <div class="custom-select">
                                 <span class="dropdown-arrow"></span>
-                                <select>
-                                    <option th:each="collaborator : ${collaborators}" th:value="${collaborator.id}" th:text="${collaborator.name}"></option>
+                                <select th:field="*{collaborators}">
+                                    <option value="0">None</option>
+                                    <option th:each="collaborator : ${role.collaborators}" th:value="${collaborator.id}" th:text="${collaborator.name}">Collaborator Name</option>
                                 </select>
                             </div>
                         </li>
                     </ul>
                     <div class="actions">
-                        <input type="submit" value="Save" class="button"/>
-                        <a href="#" class="button button-secondary">Cancel</a>
+                        <button type="submit" class="button" >Submit</button>
+                        <!--<input type="submit" value="Save" class="button"/>-->
+                        <a href="'/project-detail/' + *{id}" class="button button-secondary">Cancel</a>
                     </div>
                 </form>
             </div>

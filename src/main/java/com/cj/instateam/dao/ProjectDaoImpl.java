@@ -21,6 +21,11 @@ public class ProjectDaoImpl implements ProjectDao{
     public List<Project> findAll() {
         Session session = sessionFactory.openSession();
         List<Project> projects = session.createCriteria(Project.class).list();
+        for (Project project : projects) {
+            Hibernate.initialize(project.getName());
+            Hibernate.initialize(project.getCollaborators());
+            Hibernate.initialize(project.getRolesNeeded());
+        }
         session.close();
         return projects;
     }
@@ -29,7 +34,7 @@ public class ProjectDaoImpl implements ProjectDao{
     public Project findById(int id) {
         Session session = sessionFactory.openSession();
         Project project = session.get(Project.class, id);
-        Hibernate.initialize(project.getName()); // TODO:  CJ get other Project fields?
+        Hibernate.initialize(project.getName());
         Hibernate.initialize(project.getCollaborators());
         Hibernate.initialize(project.getRolesNeeded());
         session.close();
