@@ -45,4 +45,11 @@ public class Role {
         return this;
     }
 
+    public List<Collaborator> getCollaborators() {
+        return collaborators;
+    }
+
+    public void setCollaborators(List<Collaborator> collaborators) {
+        this.collaborators = collaborators;
+    }
 }
