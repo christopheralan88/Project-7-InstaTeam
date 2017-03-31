@@ -27,44 +27,34 @@
         </nav>
         <section>
             <div class="container wrapper">
-                <form th:action="'/edit_project/' + ${project.id}" method="post">
+                <form th:action="'/edit_project/' + ${project.id}" method="post" th:object="${project}">
+                    <input type="hidden" th:field="*{id}"/>
+                    <input type="hidden" th:field="*{rolesNeeded}"/>
                     <div>
                         <label for="project_name"> Project Name:</label>
-                        <input type="text" name="project_name" id="project_name" th:placeholder="${project.name}"/>
+                        <input type="text" name="project_name" id="project_name" th:field="*{name}" th:value="*{name}"/>
                     </div>
                     <div>
                         <label for="project_description">Project Description:</label>
-                        <textarea rows="4" name="project_description" id="project_description" th:text="${project.description}"></textarea>
+                        <textarea rows="4" name="project_description" id="project_description" th:field="*{description}" th:text="*{description}"></textarea>
                     </div>
                     <div>
                         <label for="project_status">Project Status:</label>
                         <div class="custom-select">
                         <span class="dropdown-arrow"></span>
-                            <select name="project_status" id="project_status">
-                                <option value="active">Active</option>
-                                <option value="archived">Archived</option>
-                                <option value="not_started">Not Started</option>
+                            <select name="project_status" id="project_status" th:field="*{status}">
+                                <option value="Active">Active</option>
+                                <option value="Closed">Closed</option>
+                                <option value="Complete">Complete</option>
                             </select>
                         </div>
                     </div>
                     <div>
                         <label for="project_roles">Project Roles:</label>
-                        <ul class="checkbox-list" id="project_roles">
-                            <li>
-                                <input type="checkbox" name="project_roles" value="Developer"/>
-                                <span class="primary"> Developer</span>
-                            </li>
-                            <li>
-                                <input type="checkbox" name="project_roles" value="Designer"/>
-                                <span class="primary"> Designer</span>
-                            </li>
-                            <li>
-                                <input type="checkbox" name="project_roles" value="QA"/>
-                                <span class="primary"> QA</span>
-                            </li>
-                            <li>
-                                <input type="checkbox" name="project_roles" value="DevOps"/>
-                                <span class="primary"> DevOps</span>
+                        <ul class="checkbox-list" id="project_roles" th:field="*{rolesNeeded}">
+                            <li th:each="role : ${roles}">
+                                <input type="checkbox" th:name="${role.id}" th:value="${role.name}"/>
+                                <span class="primary" th:text="${role.name}"> Developer</span>
                             </li>
                         </ul>
                     </div>

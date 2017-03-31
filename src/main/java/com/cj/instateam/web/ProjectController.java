@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
@@ -79,21 +80,28 @@ public class ProjectController {
 
     @RequestMapping(value = "/edit_project/{id}", method = RequestMethod.GET)
     public String viewEditProject(@PathVariable int id, ModelMap model) {
-        Project project = projectService.findById(id);
-        model.put("project", project);
+        if (! model.containsAttribute("project")) {
+            Project project = projectService.findById(id);
+            model.put("project", project);
+        }
+        List<Role> roles = roleService.findAll();
+        //model.put("project", project);
+        model.put("roles", roles);
         return "edit_project";
     }
 
     @RequestMapping(value = "/edit_project/{id}", method = RequestMethod.POST)
-    public String editProject(@PathVariable int id,
-                              @RequestParam(value = "project_name") String name,
-                              @RequestParam(value = "project_description") String description,
-                              @RequestParam(value = "project_status") String status,
-                              ModelMap model) {
-        Project project = new Project().setId(id)
-                                       .setName(name)
-                                       .setDescription(description)
-                                       .setStatus(status);
+    public String editProject(@Valid Project project, BindingResult result, RedirectAttributes redirectAttributes) {
+        if (result.hasErrors()) {
+            redirectAttributes.addFlashAttribute("project", project);
+            return "redirect:/edit_project/{id}";
+        }
+
+        Project newProject = new Project().setId(project.getId())
+                                          .setName(project.getName())
+                                          .setDescription(project.getDescription())
+                                          .setStatus(project.getStatus())
+                                          .setRolesNeeded(project.getRolesNeeded());
         projectService.save(project);
         return "redirect:/project-detail/{id}";
     }
@@ -121,7 +129,7 @@ public class ProjectController {
         return "redirect:/project-detail/{id}";
     }
 
-    private Map<Role, List<Collaborator>> mapRolesAndCollaborators(Project project) {
+    /*private Map<Role, List<Collaborator>> mapRolesAndCollaborators(Project project) {
         // get all project roles
         List<Role> roles = project.getRolesNeeded();
         // get all project collaborators
@@ -131,19 +139,19 @@ public class ProjectController {
         for (Role role : roles) {
             List<Collaborator> collsWithRoleId = collaborators.stream().filter(c -> c.getId() == role.getId()).collect(Collectors.toList());
             map.put(role, collsWithRoleId);
-            /*if (collsWithRoleId.size() > 1) {
+            if (collsWithRoleId.size() > 1) {
                 map.put(role, collsWithRoleId.get(0));
                 // remove collaborator from project collaborators once it is added to the map so that collaborators are not added twice.
                 collaborators.remove(collsWithRoleId.get(0));
             } else {
                 map.put(role, collsWithRoleId.get(0));
-            }*/
+            }
 
         }
         return map;
         // for each role search thru collaborators and remove the one that matches the role id...add collaborator to map
 
         // return map
-    }
+    }*/
 
 }

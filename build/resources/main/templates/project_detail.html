@@ -22,7 +22,7 @@
             <ul>
                 <li class="selected"><a href="/">Projects</a></li>
                 <li><a href="/collaborators">Collaborators</a></li>
-                <li class="selected"><a href="/roles">Roles</a></li>
+                <li><a href="/roles">Roles</a></li>
             </ul>
         </nav>
         <section>
@@ -35,9 +35,9 @@
                     </div>
                     <div class="roles-collaborators">
                         <h3>Roles &amp; Collaborators</h3>
-                        <div class="list-item" th:each="role : ${project.rolesNeeded}">
-                            <span class="primary" th:text="${role.name}"></span>
-                            <span class="secondary">Michael Pemulis</span>
+                        <div class="list-item" th:each="collaborator : ${project.collaborators}">
+                            <span class="primary" th:text="${collaborator.name}"></span>
+                            <span class="secondary" th:text="${collaborator.role.name}">Michael Pemulis</span>
                         </div>
                     </div>
                     <div class="actions">
