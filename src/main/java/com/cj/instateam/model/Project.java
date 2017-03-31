@@ -89,6 +89,40 @@ public class Project {
         return collaborators;
     }
 
+    // methods
+
+    public void addRole(Role role) {
+        rolesNeeded.add(role);
+    }
+
+    public void addCollaborator(Collaborator collaborator) {
+        collaborators.add(collaborator);
+    }
+
+    // overrides
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Project project = (Project) o;
+
+        if (id != project.id) return false;
+        if (name != null ? !name.equals(project.name) : project.name != null) return false;
+        if (description != null ? !description.equals(project.description) : project.description != null) return false;
+        return status != null ? status.equals(project.status) : project.status == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (description != null ? description.hashCode() : 0);
+        result = 31 * result + (status != null ? status.hashCode() : 0);
+        return result;
+    }
+
     public Project setCollaborators(List<Collaborator> collaborators) {
         this.collaborators = collaborators;
         return this;
