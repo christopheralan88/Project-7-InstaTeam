@@ -15,7 +15,6 @@ import java.util.Set;
 
 
 @Component
-@Configuration
 public class StringCollaboratorConverter implements Converter<String, Collaborator> {
 
     @Autowired
