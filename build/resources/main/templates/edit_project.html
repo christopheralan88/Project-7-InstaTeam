@@ -1,69 +1,69 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="www.thymeleaf.org">
-    <head>
-        <meta charset="utf-8"/>
-        <meta http-equiv="x-ua-compatible" content="ie=edge"/>
-        <title>InstaTeam</title>
-        <link href='https://fonts.googleapis.com/css?family=Inconsolata:400,700' rel='stylesheet' type='text/css'/>
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
-        <link rel="stylesheet" th:href="@{/normalize.css}"/>
-        <link rel="stylesheet" th:href="@{/site.css}"/>
-    </head>
-    <body>
-        <header>
-            <div class="container">
-                <div class="site-header">
-                    <a class="logo" href="/">InstaTeam</a>
-                    <a class="new-project button icon-left" href="#"><i class="material-icons">add</i> New Project</a>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+    <title>InstaTeam</title>
+    <link href='https://fonts.googleapis.com/css?family=Inconsolata:400,700' rel='stylesheet' type='text/css'/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+    <link rel="stylesheet" th:href="@{/normalize.css}"/>
+    <link rel="stylesheet" th:href="@{/site.css}"/>
+</head>
+<body>
+<header>
+    <div class="container">
+        <div class="site-header">
+            <a class="logo" href="/">InstaTeam</a>
+            <a class="new-project button icon-left" href="#"><i class="material-icons">add</i> New Project</a>
+        </div>
+    </div>
+</header>
+<nav>
+    <ul>
+        <li class="selected"><a href="/">Projects</a></li>
+        <li><a href="/collaborators">Collaborators</a></li>
+        <li><a href="/roles">Roles</a></li>
+    </ul>
+</nav>
+<section>
+    <div class="container wrapper">
+        <form th:action="'/edit_project/' + ${project.id}" method="post" th:object="${project}">
+            <input type="hidden" th:field="*{id}"/>
+            <!--<input type="hidden" th:field="*{rolesNeeded}"/>-->
+            <div>
+                <label for="project_name"> Project Name:</label>
+                <input type="text" name="project_name" id="project_name" th:field="*{name}" th:value="*{name}"/>
+            </div>
+            <div>
+                <label for="project_description">Project Description:</label>
+                <textarea rows="4" name="project_description" id="project_description" th:field="*{description}" th:text="*{description}"></textarea>
+            </div>
+            <div>
+                <label for="project_status">Project Status:</label>
+                <div class="custom-select">
+                    <span class="dropdown-arrow"></span>
+                    <select name="project_status" id="project_status" th:field="*{status}">
+                        <option value="Active">Active</option>
+                        <option value="Closed">Closed</option>
+                        <option value="Complete">Complete</option>
+                    </select>
                 </div>
             </div>
-        </header>
-        <nav>
-            <ul>
-                <li class="selected"><a href="/">Projects</a></li>
-                <li><a href="/collaborators">Collaborators</a></li>
-                <li><a href="/roles">Roles</a></li>
-            </ul>
-        </nav>
-        <section>
-            <div class="container wrapper">
-                <form th:action="'/edit_project/' + ${project.id}" method="post" th:object="${project}">
-                    <input type="hidden" th:field="*{id}"/>
-                    <input type="hidden" th:field="*{rolesNeeded}"/>
-                    <div>
-                        <label for="project_name"> Project Name:</label>
-                        <input type="text" name="project_name" id="project_name" th:field="*{name}" th:value="*{name}"/>
-                    </div>
-                    <div>
-                        <label for="project_description">Project Description:</label>
-                        <textarea rows="4" name="project_description" id="project_description" th:field="*{description}" th:text="*{description}"></textarea>
-                    </div>
-                    <div>
-                        <label for="project_status">Project Status:</label>
-                        <div class="custom-select">
-                        <span class="dropdown-arrow"></span>
-                            <select name="project_status" id="project_status" th:field="*{status}">
-                                <option value="Active">Active</option>
-                                <option value="Closed">Closed</option>
-                                <option value="Complete">Complete</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div>
-                        <label for="project_roles">Project Roles:</label>
-                        <ul class="checkbox-list" id="project_roles" th:field="*{rolesNeeded}">
-                            <li th:each="role : ${roles}">
-                                <input type="checkbox" th:name="${role.id}" th:value="${role.name}"/>
-                                <span class="primary" th:text="${role.name}"> Developer</span>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="actions">
-                        <input type="submit" value="Save" class="button"/>
-                        <a href="#" class="button button-secondary">Cancel</a>
-                    </div>
-                </form>
+            <div>
+                <label for="project_roles">Project Roles:</label>
+                <ul class="checkbox-list" id="project_roles" >
+                    <li th:each="role : ${roles}">
+                        <input type="checkbox" th:field="*{rolesNeeded}" th:value="${role.id}"/>
+                        <span class="primary" th:text="${role.name}"> Developer</span>
+                    </li>
+                </ul>
             </div>
-        </section>
-    </body>
+            <div class="actions">
+                <input type="submit" value="Save" class="button"/>
+                <a href="#" class="button button-secondary">Cancel</a>
+            </div>
+        </form>
+    </div>
+</section>
+</body>
 </html>

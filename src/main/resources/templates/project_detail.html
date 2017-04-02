@@ -35,10 +35,22 @@
                     </div>
                     <div class="roles-collaborators">
                         <h3>Roles &amp; Collaborators</h3>
-                        <div class="list-item" th:each="collaborator : ${project.collaborators}">
-                            <span class="primary" th:text="${collaborator.name}"></span>
-                            <span class="secondary" th:text="${collaborator.role.name}">Michael Pemulis</span>
+                        <div th:if="${project.rolesNeeded.size() == 0}">
+                            <p>There are no roles associated with this project.</p>
                         </div>
+                        <div th:if="${project.rolesNeeded.size() != 0 and project.collaborators.size() == 0}">
+                            <div class="list-item" th:each="role : ${project.rolesNeeded}">
+                                <span class="primary">No Collaborator Assigned</span>
+                                <span class="secondary" th:text="${role.name}"></span>
+                            </div>
+                        </div>
+                        <div th:if="${project.collaborators.size() != 0}">
+                            <div class="list-item" th:each="collaborator : ${project.collaborators}">
+                                <span class="primary" th:text="${collaborator.name}"></span>
+                                <span class="secondary" th:text="${collaborator.role.name}"></span>
+                            </div>
+                        </div>
+
                     </div>
                     <div class="actions">
                         <a class="button" th:href="'/edit_project/' + ${project.id}">Edit Project</a>
