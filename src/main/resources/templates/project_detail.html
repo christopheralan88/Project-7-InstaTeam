@@ -35,15 +35,21 @@
                     </div>
                     <div class="roles-collaborators">
                         <h3>Roles &amp; Collaborators</h3>
+
+                        <!--if the project has no roles-->
                         <div th:if="${project.rolesNeeded.size() == 0}">
                             <p>There are no roles associated with this project.</p>
                         </div>
+
+                        <!--if the project has roles but no collaborators assigned to those roles for the project-->
                         <div th:if="${project.rolesNeeded.size() != 0 and project.collaborators.size() == 0}">
                             <div class="list-item" th:each="role : ${project.rolesNeeded}">
                                 <span class="primary">No Collaborator Assigned</span>
                                 <span class="secondary" th:text="${role.name}"></span>
                             </div>
                         </div>
+
+                        <!--if the project has roles and has collaborators assigned to those roles for the project-->
                         <div th:if="${project.collaborators.size() != 0}">
                             <div class="list-item" th:each="collaborator : ${project.collaborators}">
                                 <span class="primary" th:text="${collaborator.name}"></span>
