@@ -15,7 +15,6 @@ import java.util.Set;
 
 
 @Component
-@Configuration
 public class StringRoleConverter implements Converter<String, Role> {
 
     @Autowired
