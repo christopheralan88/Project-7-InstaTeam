@@ -85,7 +85,6 @@ public class ProjectController {
             model.put("project", project);
         }
         List<Role> roles = roleService.findAll();
-        //model.put("project", project);
         model.put("roles", roles);
         return "edit_project";
     }
@@ -93,6 +92,7 @@ public class ProjectController {
     @RequestMapping(value = "/edit_project/{id}", method = RequestMethod.POST)
     public String editProject(@Valid Project project, BindingResult result, RedirectAttributes redirectAttributes) {
         if (result.hasErrors()) {
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.project", result);
             redirectAttributes.addFlashAttribute("project", project);
             return "redirect:/edit_project/{id}";
         }

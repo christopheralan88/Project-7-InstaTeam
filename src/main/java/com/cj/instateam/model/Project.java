@@ -15,12 +15,15 @@ public class Project {
     private int id;
 
     @Column
+    @NotNull(message = "You must enter a name")
     private String name;
 
     @Column
+    @NotNull(message = "You must enter a description")
     private String description;
 
     @Column
+    @NotNull(message = "You must choose a status")
     private String status;
 
     public void setCollaborators(List<Collaborator> collaborators) {
