@@ -94,14 +94,15 @@ public class ProjectController {
         if (result.hasErrors()) {
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.project", result);
             redirectAttributes.addFlashAttribute("project", project);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.project", result);
             return "redirect:/edit_project/{id}";
         }
 
-        Project newProject = new Project().setId(project.getId())
+        /*Project newProject = new Project().setId(project.getId())
                                           .setName(project.getName())
                                           .setDescription(project.getDescription())
                                           .setStatus(project.getStatus())
-                                          .setRolesNeeded(project.getRolesNeeded());
+                                          .setRolesNeeded(project.getRolesNeeded());*/
         projectService.save(project);
         return "redirect:/project-detail/{id}";
     }
