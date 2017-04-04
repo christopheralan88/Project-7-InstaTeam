@@ -3,6 +3,7 @@ package com.cj.instateam.model;
 import javax.validation.constraints.NotNull;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +20,7 @@ public class Project {
     private String name;
 
     @Column
+    @Size(min = 1)
     @NotNull(message = "You must enter a description")
     private String description;
 

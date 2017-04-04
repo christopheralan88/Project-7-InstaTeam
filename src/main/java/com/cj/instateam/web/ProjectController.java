@@ -94,7 +94,6 @@ public class ProjectController {
         if (result.hasErrors()) {
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.project", result);
             redirectAttributes.addFlashAttribute("project", project);
-            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.project", result);
             return "redirect:/edit_project/{id}";
         }
 
