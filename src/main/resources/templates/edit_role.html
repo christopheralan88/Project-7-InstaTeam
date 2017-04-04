@@ -29,12 +29,11 @@
             <div>
                 <form th:action="'/edit_role/' + ${role.id}" method="post">
                     <input type="hidden" th:field="*{role.id}"/>
-                    <label for="role_name">Enter Role's New Name</label>
-                    <!--th:value="${role.id}"-->
-                    <!--<h1 class="hidden" id="role_id" th:text="${role.id}" id="role_id"></h1>-->
-                    <input type="text" id="role_name" name="role_name" th:placeholder="${role.name}"/>
-                    <br/>
-                    <button type="submit" id="submit" name="submit">Edit</button>
+                    <div class="actions add-new-role">
+                        <label for="role_name">Enter Role's New Name</label>
+                        <input type="text" id="role_name" name="role_name" th:value="${role.name}"/>
+                        <button class="button" type="submit" id="submit" name="submit">Edit</button>
+                    </div>
                 </form>
             </div>
         </section>

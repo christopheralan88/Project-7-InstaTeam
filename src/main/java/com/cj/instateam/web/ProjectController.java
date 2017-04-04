@@ -74,7 +74,7 @@ public class ProjectController {
                               .setDescription(description)
                               .setStatus(status)
                               .setRolesNeeded(rolesNeeded);
-        projectService.save(project); // TODO:  CJ wrap this in try-catch block.
+        projectService.save(project);
         return "redirect:/";
     }
 
@@ -128,30 +128,4 @@ public class ProjectController {
         projectService.save(origProject);
         return "redirect:/project-detail/{id}";
     }
-
-    /*private Map<Role, List<Collaborator>> mapRolesAndCollaborators(Project project) {
-        // get all project roles
-        List<Role> roles = project.getRolesNeeded();
-        // get all project collaborators
-        List<Collaborator> collaborators = project.getCollaborators();
-        // add each role to map
-        Map<Role, List<Collaborator>> map = new HashMap<>();
-        for (Role role : roles) {
-            List<Collaborator> collsWithRoleId = collaborators.stream().filter(c -> c.getId() == role.getId()).collect(Collectors.toList());
-            map.put(role, collsWithRoleId);
-            if (collsWithRoleId.size() > 1) {
-                map.put(role, collsWithRoleId.get(0));
-                // remove collaborator from project collaborators once it is added to the map so that collaborators are not added twice.
-                collaborators.remove(collsWithRoleId.get(0));
-            } else {
-                map.put(role, collsWithRoleId.get(0));
-            }
-
-        }
-        return map;
-        // for each role search thru collaborators and remove the one that matches the role id...add collaborator to map
-
-        // return map
-    }*/
-
 }

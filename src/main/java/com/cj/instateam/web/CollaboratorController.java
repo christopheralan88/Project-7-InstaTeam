@@ -41,19 +41,6 @@ public class CollaboratorController {
         return "edit_collaborators";
     }
 
-    /*@RequestMapping(value = "/edit_collaborator/{id}", method = RequestMethod.POST)
-    public String addCollaborator(@PathVariable(value = "id") String id) // collaborator id
-    //@RequestParam(value = "collaborator_name") String collaboratorName,
-    //@RequestParam(value = "role") String roleId)
-    {
-        Role role = roleService.findById(Integer.parseInt(id));
-        Collaborator collaborator = new Collaborator().setId(Integer.parseInt(id))
-                .setName(id)
-                .setRole(role);
-        collaboratorService.save(collaborator);
-        return "redirect:/collaborators";
-    }*/
-
     @RequestMapping(value = "/edit_collaborator/{id}", method = RequestMethod.POST)
     public String editCollaborators(@PathVariable(value = "id") String id, // collaborator id
                                     @RequestParam(value = "collaborator_name") String collaboratorName,
