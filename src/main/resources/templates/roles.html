@@ -27,7 +27,8 @@
         </nav>
         <section>
             <div class="container wrapper">
-                <form action="/roles" method="post">
+                <form action="/roles" method="post" th:object="${newRole}">
+                    <input type="hidden" th:field="*{id}"/>
                     <h2>Manage Roles</h2>
                     <div>
                         <ul class="checkbox-list">
@@ -38,7 +39,7 @@
                     </div>
                     <br/>
                     <div class="actions add-new-role">
-                        <input type="text" id="role_name" name="role_name" placeholder="New Role..."/>
+                        <input type="text" th:field="*{name}" id="role_name" name="role_name" placeholder="New Role..."/>
                     <button class="button" type="submit" id="submit" name="submit">Add</button>
                     </div>
                 </form>

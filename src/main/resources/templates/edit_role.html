@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" xmlns:th="www.thymeleaf.org">
+    <html lang="en" xmlns:th="www.thymeleaf.org">
     <head>
         <meta charset="utf-8"/>
         <meta http-equiv="x-ua-compatible" content="ie=edge"/>
@@ -27,11 +27,11 @@
         </nav>
         <section>
             <div>
-                <form th:action="'/edit_role/' + ${role.id}" method="post">
-                    <input type="hidden" th:field="*{role.id}"/>
+                <form action="/roles" method="post" th:object="${role}">
+                    <input type="hidden" th:field="*{id}"/>
                     <div class="actions add-new-role">
-                        <label for="role_name">Enter Role's New Name</label>
-                        <input type="text" id="role_name" name="role_name" th:value="${role.name}"/>
+                        <h1>Enter Role's New Name</h1>
+                        <input type="text" th:field="*{name}" th:value="*{name}"/>
                         <button class="button" type="submit" id="submit" name="submit">Edit</button>
                     </div>
                 </form>
