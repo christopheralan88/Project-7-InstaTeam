@@ -54,26 +54,20 @@ public class ProjectController {
     public String displayAddProjectForm(ModelMap model) {
         List<Role> roles = roleService.findAll();
         List<Collaborator> collaborators = collaboratorService.findAll();
+        model.put("project", new Project());
         model.put("roles", roles);
         model.put("collaborators", collaborators);
-        return "add_project";
+        return "edit_project";
     }
 
     @RequestMapping(value = "/", method = RequestMethod.POST)
-    public String addProject(@RequestParam(value = "name") String name,
-                             @RequestParam(value = "description") String description,
-                             @RequestParam(value = "status") String status,
-                             @RequestParam(value = "roles_needed", required = false) List<String> rolesNeededIds,
-                             ModelMap model) {
-        List<Role> rolesNeeded = new ArrayList<>();
-        for (String roleId : rolesNeededIds) {
-            rolesNeeded.add(roleService.findById(Integer.parseInt(roleId)));
+    public String addProject(@Valid Project project, BindingResult result, RedirectAttributes redirectAttributes) {
+        if (result.hasErrors()) {
+            redirectAttributes.addFlashAttribute("project", project);
+            redirectAttributes.addFlashAttribute("errors", "Please fill out the form completely.");
+            return "redirect:/errors";
         }
-        Project project = new Project()
-                              .setName(name)
-                              .setDescription(description)
-                              .setStatus(status)
-                              .setRolesNeeded(rolesNeeded);
+
         projectService.save(project);
         return "redirect:/";
     }
@@ -92,19 +86,6 @@ public class ProjectController {
     @RequestMapping(value = "/errors", method = RequestMethod.GET)
     public String viewErrorsPage() {
         return "errors";
-    }
-
-    @RequestMapping(value = "/edit_project/{id}", method = RequestMethod.POST)
-    public String editProject(@Valid Project project, BindingResult result, RedirectAttributes redirectAttributes) {
-        if (result.hasErrors()) {
-            //redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.project", result);
-            redirectAttributes.addFlashAttribute("project", project);
-            redirectAttributes.addFlashAttribute("errors", "You did not complete the form.  Please fill out the form completely.");
-            return "redirect:/errors";
-        }
-
-        projectService.save(project);
-        return "redirect:/project-detail/{id}";
     }
 
     @RequestMapping(value = "/project_collaborators/{projectId}", method = RequestMethod.GET)
