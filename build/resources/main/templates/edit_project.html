@@ -30,6 +30,10 @@
         <form th:action="'/edit_project/' + ${project.id}" method="post" th:object="${project}">
             <input type="hidden" th:field="*{id}"/>
 
+            <div th:if="${error != null}">
+                <p th:text="${error}"></p>
+            </div>
+
             <div th:classappend="${#fields.hasErrors('name')}? 'error' : ''">
                 <label for="project_name"> Project Name:</label>
                 <input type="text" name="project_name" id="project_name" th:field="*{name}" th:value="*{name}"/>

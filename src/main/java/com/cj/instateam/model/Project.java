@@ -17,6 +17,7 @@ public class Project {
 
     @Column
     @NotNull(message = "You must enter a name")
+    @Size(min = 1)
     private String name;
 
     @Column
@@ -26,6 +27,7 @@ public class Project {
 
     @Column
     @NotNull(message = "You must choose a status")
+    @Size(min = 1)
     private String status;
 
     public void setCollaborators(List<Collaborator> collaborators) {

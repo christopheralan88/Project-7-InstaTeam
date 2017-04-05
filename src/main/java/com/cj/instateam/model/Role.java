@@ -4,6 +4,7 @@ package com.cj.instateam.model;
 import javax.validation.constraints.NotNull;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +17,7 @@ public class Role {
 
     @Column
     @NotNull
+    @Size(min = 1)
     private String name;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "role") // many roles to one collaborator...mappedby means

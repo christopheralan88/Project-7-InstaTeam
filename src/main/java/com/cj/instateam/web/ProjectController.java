@@ -89,19 +89,20 @@ public class ProjectController {
         return "edit_project";
     }
 
+    @RequestMapping(value = "/errors", method = RequestMethod.GET)
+    public String viewErrorsPage() {
+        return "errors";
+    }
+
     @RequestMapping(value = "/edit_project/{id}", method = RequestMethod.POST)
     public String editProject(@Valid Project project, BindingResult result, RedirectAttributes redirectAttributes) {
         if (result.hasErrors()) {
-            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.project", result);
+            //redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.project", result);
             redirectAttributes.addFlashAttribute("project", project);
-            return "redirect:/edit_project/{id}";
+            redirectAttributes.addFlashAttribute("errors", "You did not complete the form.  Please fill out the form completely.");
+            return "redirect:/errors";
         }
 
-        /*Project newProject = new Project().setId(project.getId())
-                                          .setName(project.getName())
-                                          .setDescription(project.getDescription())
-                                          .setStatus(project.getStatus())
-                                          .setRolesNeeded(project.getRolesNeeded());*/
         projectService.save(project);
         return "redirect:/project-detail/{id}";
     }
