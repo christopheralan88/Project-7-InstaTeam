@@ -27,7 +27,7 @@
 </nav>
 <section>
     <div class="container wrapper">
-        <form th:action="'/edit_project/' + ${project.id}" method="post" th:object="${project}">
+        <form action="/" method="post" th:object="${project}">
             <input type="hidden" th:field="*{id}"/>
 
             <div th:if="${error != null}">
@@ -72,7 +72,7 @@
 
             <div class="actions">
                 <input type="submit" value="Save" class="button"/>
-                <a href="#" class="button button-secondary">Cancel</a>
+                <a href="/" class="button button-secondary">Cancel</a>
             </div>
 
         </form>
